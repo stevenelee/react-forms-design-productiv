@@ -27,9 +27,6 @@ function TodoApp( { initialTodos }) {
 
   /** update a todo with updatedTodo */
   function update(updatedTodo) {
-    //TODO: is it ok to use setTodo twice in a row?
-    // let updateTodos = todos => todos.filter(todo => todo.id !== updatedTodo.id);
-    // setTodos(todos => [...updateTodos, updatedTodo]);
     setTodos(todos => todos.map(
       todo => todo.id === updatedTodo.id ? updatedTodo : todo));
   }
