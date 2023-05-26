@@ -30,7 +30,8 @@ function TodoApp( { initialTodos }) {
     //TODO: is it ok to use setTodo twice in a row?
     // let updateTodos = todos => todos.filter(todo => todo.id !== updatedTodo.id);
     // setTodos(todos => [...updateTodos, updatedTodo]);
-    setTodos(todos => todos.map(todo => todo.id === updatedTodo.id ? updatedTodo : todo));
+    setTodos(todos => todos.map(
+      todo => todo.id === updatedTodo.id ? updatedTodo : todo));
   }
 
   /** delete a todo by id */
@@ -49,11 +50,11 @@ function TodoApp( { initialTodos }) {
           </div>
 
           <div className="col-md-6">
-            (if no top todo, omit this whole section)
+            {todos.length > 0 &&
             <section className="mb-4">
               <h3>Top Todo</h3>
-              <TopTodo />
-            </section>
+              <TopTodo todos={todos} />
+            </section>}
 
             <section>
               <h3 className="mb-3">Add Nü</h3>

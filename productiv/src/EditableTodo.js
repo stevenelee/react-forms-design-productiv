@@ -17,10 +17,9 @@ function EditableTodo({ todo, update, remove }) {
 
   /** Toggle if this is being edited */
   function toggleEdit() {
-    console.log("clicked");
     setClicked(true);
   }
-  console.log("todo", todo);
+
   /** Call remove fn passed to this. */
   function handleDelete() {
     remove(todo.id);
@@ -49,13 +48,7 @@ function EditableTodo({ todo, update, remove }) {
             Del
           </button>
         </div>
-        <Todo
-          id={todo.id}
-          key={todo.id}
-          title={todo.title}
-          description={todo.description}
-          priority={todo.priority}
-        />
+        <Todo todo={todo} />
       </div>}
       {clicked &&
           <div>
