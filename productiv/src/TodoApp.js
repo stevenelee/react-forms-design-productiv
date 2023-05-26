@@ -43,8 +43,9 @@ function TodoApp( { initialTodos }) {
         <div className="row">
 
           <div className="col-md-6">
-            <EditableTodoList todos={todos} update={update} remove={remove}/> OR
-            <span className="text-muted">You have no todos.</span>
+            <EditableTodoList todos={todos} update={update} remove={remove}/>
+            {todos.length === 0 && <span className="text-muted">
+              You have no todos.</span>}
           </div>
 
           <div className="col-md-6">

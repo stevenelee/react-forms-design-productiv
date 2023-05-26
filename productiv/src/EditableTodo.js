@@ -13,12 +13,14 @@ import TodoForm from "./TodoForm";
  */
 
 function EditableTodo({ todo, update, remove }) {
+  const [clicked, setClicked] = useState(false);
 
   /** Toggle if this is being edited */
   function toggleEdit() {
-    return <TodoForm initialFormData={todo} handleSave={handleSave}/>
+    console.log("clicked");
+    setClicked(true);
   }
-
+  console.log("todo", todo);
   /** Call remove fn passed to this. */
   function handleDelete() {
     remove(todo.id);
@@ -28,34 +30,38 @@ function EditableTodo({ todo, update, remove }) {
   function handleSave(formData) {
     const updatedTodo = { ...formData, id: todo.id };
     update(updatedTodo);
+    setClicked(false);
   }
 
   return (
-      <div className="EditableTodo">
-
-        EITHER
-
-        <TodoForm />
-
-        OR
-
-        <div className="mb-3">
-          <div className="float-end text-sm-end">
-            <button
-                className="EditableTodo-toggle btn-link btn btn-sm"
-                onClick={toggleEdit}>
-              Edit
-            </button>
-            <button
-                className="EditableTodo-delBtn btn-link btn btn-sm text-danger"
-                onClick={handleDelete}>
-              Del
-            </button>
-          </div>
-          <Todo />
+    <div className="EditableTodo">
+      {!clicked &&
+      <div className="mb-3">
+        <div className="float-end text-sm-end">
+          <button
+            className="EditableTodo-toggle btn-link btn btn-sm"
+            onClick={toggleEdit}>
+            Edit
+          </button>
+          <button
+            className="EditableTodo-delBtn btn-link btn btn-sm text-danger"
+            onClick={handleDelete}>
+            Del
+          </button>
         </div>
-
-      </div>
+        <Todo
+          id={todo.id}
+          key={todo.id}
+          title={todo.title}
+          description={todo.description}
+          priority={todo.priority}
+        />
+      </div>}
+      {clicked &&
+          <div>
+            <TodoForm initialFormData={todo} handleSave={handleSave} />
+          </div>}
+    </div>
   );
 }
 
